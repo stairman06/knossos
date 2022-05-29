@@ -345,7 +345,10 @@ export default {
       maxResults: 20,
 
       sidebarMenuOpen: false,
-      showAllLoaders: false,
+      showAllLoaders:
+        this.$route.query.g &&
+        (this.$route.query.g.includes('modloader') ||
+          this.$route.query.g.includes('rift')),
 
       skipLink: '#search-results',
     }
