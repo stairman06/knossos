@@ -34,11 +34,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import LightIcon from '~/assets/images/external/exaroton-light.svg?inline'
 import DarkIcon from '~/assets/images/external/exaroton-dark.svg?inline'
 
-export default {
+export default defineComponent({
   name: 'Advertisement',
   components: {
     LightIcon,
@@ -49,7 +50,7 @@ export default {
       isBlocked: true,
     }
   },
-}
+})
 </script>
 
 <style lang="scss">

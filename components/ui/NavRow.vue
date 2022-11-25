@@ -30,18 +30,31 @@
   </nav>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { defineComponent, ref, PropType } from 'vue'
+
+interface Link {
+  label: string
+  href: string
+  shown?: boolean
+}
+
+export default defineComponent({
   name: 'NavRow',
   props: {
     links: {
       default: () => [],
-      type: Array,
+      type: Array as PropType<Link[]>,
     },
     query: {
       default: null,
       type: String,
     },
+  },
+  setup() {
+    return {
+      linkElements: ref<Vue[] | null>(null),
+    }
   },
   data() {
     return {
@@ -103,27 +116,28 @@ export default {
       }
     },
     startAnimation() {
-      if (this.$refs.linkElements[this.activeIndex]) {
+      if (this.linkElements && this.linkElements[this.activeIndex]) {
         this.indicator.direction =
           this.activeIndex < this.oldIndex ? 'left' : 'right'
 
-        this.indicator.left =
-          this.$refs.linkElements[this.activeIndex].$el.offsetLeft
-        this.indicator.right =
-          this.$refs.linkElements[this.activeIndex].$el.parentElement
-            .offsetWidth -
-          this.$refs.linkElements[this.activeIndex].$el.offsetLeft -
-          this.$refs.linkElements[this.activeIndex].$el.offsetWidth
-        this.indicator.top =
-          this.$refs.linkElements[this.activeIndex].$el.offsetTop +
-          this.$refs.linkElements[this.activeIndex].$el.offsetHeight +
-          1
+        const el = this.linkElements[this.activeIndex].$el
+
+        if (!(el instanceof HTMLAnchorElement)) return
+
+        this.indicator.left = el.offsetLeft
+
+        if (el.parentElement) {
+          this.indicator.right =
+            el.parentElement.offsetWidth - el.offsetLeft - el.offsetWidth
+        }
+
+        this.indicator.top = el.offsetTop + el.offsetHeight + 1
       }
 
       this.oldIndex = this.activeIndex
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

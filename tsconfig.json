@@ -15,8 +15,15 @@
       ],
       "@/*": [
         "./*"
-      ],
-    }
+      ]
+    },
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/color-mode",
+      "@nuxtjs/axios",
+      "@nuxtjs/dayjs",
+      "@nuxtjs/markdownit"
+    ]
   },
   "exclude": [
     "node_modules",

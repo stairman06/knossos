@@ -26,7 +26,8 @@
   </span>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import ModrinthIcon from '~/assets/images/logo.svg?inline'
 import ModeratorIcon from '~/assets/images/sidebar/admin.svg?inline'
 import CreatorIcon from '~/assets/images/utils/box.svg?inline'
@@ -37,7 +38,7 @@ import CrossIcon from '~/assets/images/utils/x.svg?inline'
 import ArchiveIcon from '~/assets/images/utils/archive.svg?inline'
 import ProcessingIcon from '~/assets/images/utils/updated.svg?inline'
 
-export default {
+export default defineComponent({
   name: 'Badge',
   components: {
     ModrinthIcon,
@@ -60,7 +61,7 @@ export default {
       default: '',
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>
